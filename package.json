@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "init-db": "ts-node -P ./init-db.tsconfig.json ./init-db.ts"
   },
   "private": true,
   "dependencies": {

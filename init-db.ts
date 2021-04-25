@@ -1,15 +1,16 @@
-import * as firebase from "firebase";
-import { COURSES, findLessonsForCourse } from "./db-data";
-require("dotenv").config();
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { COURSES, findLessonsForCourse } from './db-data';
+require('dotenv').config();
 
 const config = {
-  apiKey: "AIzaSyDAdoefqX5OqjkD3BkW25ZAL6XYZMo4Vz8",
-  authDomain: "fir-course-17549.firebaseapp.com",
-  databaseURL: "https://fir-course-17549.firebaseio.com",
-  projectId: "fir-course-17549",
-  storageBucket: "fir-course-17549.appspot.com",
-  messagingSenderId: "170806523820",
-  appId: "1:170806523820:web:a3181632d54d076a0bec09",
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  databaseURL: process.env.databaseURL,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
 };
 
 console.log(JSON.stringify(config));
@@ -17,15 +18,15 @@ console.log(JSON.stringify(config));
 const app = firebase.initializeApp(config);
 const db = firebase.firestore();
 
-main().then((r) => console.log("Done."));
+main().then((r) => console.log('Done.'));
 
 async function uploadData() {
-  const courses = await db.collection("courses");
-  for (let course of Object.values(COURSES)) {
+  const courses = await db.collection('courses');
+  for (const course of Object.values(COURSES)) {
     const newCourse = removeId(course);
     const courseRef = await courses.add(newCourse);
-    const lessons = await courseRef.collection("lessons");
-    const courseLessons = findLessonsForCourse(course["id"]);
+    const lessons = await courseRef.collection('lessons');
+    const courseLessons = findLessonsForCourse(course['id']);
     for (const lesson of courseLessons) {
       const newLesson = removeId(lesson);
       await lessons.add(newLesson);
