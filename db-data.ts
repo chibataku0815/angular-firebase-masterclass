@@ -1,37 +1,29 @@
-export const COURSES: any = {
+export const USER: any = {
   1: {
     id: 1,
-    titles: {
-      description: 'Serverless Angular with Firebase Course',
-      longDescription:
-        'Serveless Angular with Firestore, Firebase Storage & Hosting, Firebase Cloud Functions & AngularFire',
-    },
-    iconUrl:
-      'https://s3-us-west-1.amazonaws.com/angular-university/course-images/serverless-angular-small.png',
-    lessonsCount: 10,
-    categories: ['BEGINNER'],
-    seqNo: 0,
-    url: 'serverless-angular',
+    name: 'Reina Oyanagi',
+    email: 'reina-oyanagi@hi-ho.ne.jp',
+    accountType: 0,
+    trade: [
+      {
+        orderId: 1,
+        orderPrice: 100,
+        orderDate: '2020-10-21 10:00:00',
+        orderType: 0,
+        result: 0,
+      },
+      {
+        orderId: 2,
+        orderPrice: 200,
+        orderDate: '2020-10-21 10:10:00',
+        orderType: 1,
+        result: 1000,
+      },
+    ],
+    cash: 5000,
   },
 };
 
-export const LESSONS = {
-  1: {
-    id: 1,
-    description:
-      'Angular Tutorial For Beginners - Build Your First App - Hello World Step By Step',
-    duration: '4:17',
-    seqNo: 1,
-    courseId: 5,
-  },
-};
-
-export function findCourseById(courseId: number) {
-  return COURSES[courseId];
-}
-
-export function findLessonsForCourse(courseId: number) {
-  return Object.values(LESSONS).filter(
-    (lesson) => lesson.courseId === courseId
-  );
+export function findUserById(uId: number) {
+  return USER[uId];
 }
