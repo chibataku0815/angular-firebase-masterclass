@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { COURSES, findLessonsForCourse } from './db-data';
+import { USER } from './db-data';
 require('dotenv').config();
 
 const config = {
@@ -21,16 +21,10 @@ const db = firebase.firestore();
 main().then((r) => console.log('Done.'));
 
 async function uploadData() {
-  const courses = await db.collection('courses');
-  for (const course of Object.values(COURSES)) {
-    const newCourse = removeId(course);
-    const courseRef = await courses.add(newCourse);
-    const lessons = await courseRef.collection('lessons');
-    const courseLessons = findLessonsForCourse(course['id']);
-    for (const lesson of courseLessons) {
-      const newLesson = removeId(lesson);
-      await lessons.add(newLesson);
-    }
+  const users = await db.collection('user');
+  for (const user of Object.values(USER)) {
+    const newUser = removeId(user);
+    await users.add(newUser);
   }
 }
 
